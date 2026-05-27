@@ -1,12 +1,3 @@
-/* ══════════════════════════════════════
-   PÉROLA & CO — script.js
-   Inclui: dados, cursor, marquee, catálogo,
-   detalhe, checkout, carrinho, toast, reveal.
-══════════════════════════════════════ */
- 
-// ════════════════════════════════
-// DADOS
-// ════════════════════════════════
 const products = [
   {
     id: 1,
