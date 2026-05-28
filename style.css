@@ -1135,5 +1135,10 @@ footer span { color: var(--rose); }
 }
 
 .insta{
-  color:#c9a96e
+  color:#c9a96e;
+  text-decoration: none;
+}
+.zap{
+  color:#c9a96e;
+  text-decoration: none;
 }
