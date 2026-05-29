@@ -6,34 +6,40 @@
 <title>Pérola & Co — Pulseiras Artesanais</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<!-- React + Babel para o personalizador -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
 </head>
 <body>
- 
+
 <div id="cursor"></div>
- 
+
 <header id="header">
   <a class="logo" href="#" onclick="showPage('catalog')">Pérola <span>&amp; Co</span></a>
   <nav>
-    <a href="#" onclick="showPage('catalog')">Coleção</a>
-    <a href="#">Histórias</a>
-    <a href="#">Contato</a>
+    <a href="#" onclick="showPage('catalog'); scrollToSection('#produtos')">Coleção</a>
+    <a href="#" onclick="showPage('catalog'); setTimeout(()=>scrollToSection('#depoimentos'),100)">Histórias</a>
+    <a href="#" onclick="showPage('catalog'); setTimeout(()=>scrollToSection('#contato'),100)">Contato</a>
   </nav>
-  <button class="cart-btn" onclick="toggleCart()">
-    Sacola
-    <span class="cart-badge" id="cartBadge">0</span>
-  </button>
-   <a href="https://wa.me/5581973420530?text=Olá%20vim%20acompanhar%20meu%20pedido"
-       target="_blank"
-          rel="noopener noreferrer"
-          class= "acompanhar-pedido">
-            Acompanhar pedido</a>
+  <div class="header-actions">
+    <button class="btn-personalizar" onclick="showPage('personalizar')">✨ Personalizar</button>
+    <button class="cart-btn" onclick="toggleCart()">
+      Sacola
+      <span class="cart-badge" id="cartBadge">0</span>
+    </button>
+    <a href="https://wa.me/5581973420530?text=Olá%20vim%20acompanhar%20meu%20pedido"
+       target="_blank" rel="noopener noreferrer" class="acompanhar-pedido">
+      Acompanhar pedido
+    </a>
+  </div>
 </header>
- 
+
 <!-- ══════════════════════════════════════
      PÁGINA: CATÁLOGO
 ══════════════════════════════════════ -->
 <div class="page active" id="page-catalog">
- 
+
   <!-- HERO -->
   <section class="hero" id="inicio">
     <div class="hero-left">
@@ -42,8 +48,7 @@
       <p>Pulseiras artesanais feitas com pérolas naturais, miçangas e cristais selecionados. Cada peça é única, criada com amor e intenção.</p>
       <div class="hero-cta">
         <button class="btn-primary" onclick="scrollToSection('#produtos')">Ver Coleção</button>
-
-        <button class="btn-ghost" onclick="scrollToSection('#contato')">Encomendas</button>
+        <button class="btn-ghost" onclick="showPage('personalizar')">✨ Criar Minha Pulseira</button>
       </div>
     </div>
     <div class="hero-right">
@@ -54,21 +59,49 @@
       </div>
     </div>
   </section>
- 
+
   <!-- MARQUEE -->
   <div class="marquee-wrap">
     <div class="marquee" id="marqueeTrack"></div>
   </div>
- 
-  <!-- PRODUTOS -->
+
+  <!-- AUDIÊNCIA TABS (Infantil / Adulta) -->
   <section id="produtos">
     <div class="section-label">✦ Nossa Coleção</div>
     <h2 class="section-title reveal">Pulseiras <em style="font-style:italic;color:var(--mauve)">prontas</em></h2>
-    <p class="section-sub reveal">Cada pulseira conta uma história. Clique em uma peça para ver todos os detalhes.</p>
+    <p class="section-sub reveal">Peças únicas para todos os momentos. Filtre por faixa etária ou tipo.</p>
+
+    <!-- TABS Infantil / Adulta -->
+    <div class="audience-tabs reveal" id="audienceTabs">
+      <button class="audience-tab active" data-audience="adulta" onclick="setAudience('adulta', this)">
+        👩 Adulta
+      </button>
+      <button class="audience-tab" data-audience="infantil" onclick="setAudience('infantil', this)">
+        🧒 Infantil
+      </button>
+    </div>
+
     <div class="filter-bar reveal" id="filterBar"></div>
     <div class="products-grid reveal" id="productsGrid"></div>
   </section>
- 
+
+  <!-- BANNER PERSONALIZAR -->
+  <section class="banner-custom reveal">
+    <div class="banner-custom-inner">
+      <div class="banner-custom-text">
+        <div class="section-label" style="color:var(--gold)">✦ Exclusivo</div>
+        <h2 class="section-title" style="color:#fff">Crie sua pulseira<br><em style="color:var(--rose)">do zero</em></h2>
+        <p style="color:rgba(255,255,255,.6);font-size:.95rem;line-height:1.7;max-width:400px;margin-bottom:32px">
+          Escolha as peças, o tamanho, as cores e a combinação perfeita para você ou para dar de presente.
+        </p>
+        <button class="btn-primary" style="background:var(--rose);color:var(--deep)" onclick="showPage('personalizar')">
+          ✨ Começar a Criar
+        </button>
+      </div>
+      <div class="banner-custom-visual">🎨</div>
+    </div>
+  </section>
+
   <!-- DEPOIMENTOS -->
   <section id="depoimentos">
     <div class="section-label">✦ Quem usa, ama</div>
@@ -76,85 +109,73 @@
     <p class="section-sub reveal">Clientes que se tornaram fãs.</p>
     <div class="reviews-grid" id="reviewsGrid"></div>
   </section>
- 
+
   <!-- CONTATO -->
   <section id="contato">
     <div class="section-label">✦ Fique por dentro</div>
     <h2 class="section-title">Novidades <em style="font-style:italic;color:var(--rose)">exclusivas</em></h2>
-    
-    <a href="https://wa.me/5581973420530?text=Olá%20vim%20pelo%20site"
-       target="_blank"
-          rel="noopener noreferrer"
-          class= "zap">
-            WhatsApp
-
-    <a href="https://instagram.com/jujuh_oliveira06" 
-    target="_blank"
-    class="insta" >
-      Instagram
+    <a href="https://wa.me/5581973420530?text=Olá%20vim%20pelo%20site" target="_blank" rel="noopener noreferrer" class="zap">WhatsApp</a>
+    <a href="https://instagram.com/jujuh_oliveira06" target="_blank" class="insta">Instagram</a>
   </section>
- 
+
   <footer>
     © 2026 Pérola <span>&amp;</span> Co — Feito com amor <span>♥</span> em Recife, PE
   </footer>
- 
+
 </div><!-- /page-catalog -->
- 
- 
+
+
+<!-- ══════════════════════════════════════
+     PÁGINA: PERSONALIZAR (React)
+══════════════════════════════════════ -->
+<div class="page" id="page-personalizar">
+  <div id="personalizador-root"></div>
+</div>
+
+
 <!-- ══════════════════════════════════════
      PÁGINA: DETALHE DO PRODUTO
 ══════════════════════════════════════ -->
 <div class="page" id="page-detail">
   <div class="detail-wrap">
- 
     <div class="breadcrumb">
       <a href="#" onclick="showPage('catalog')">Coleção</a>
       <span>›</span>
       <span id="breadcrumbName">Produto</span>
     </div>
- 
     <div class="detail-grid">
- 
-      <!-- Imagem -->
       <div class="detail-img-wrap">
         <span class="detail-tag-new" id="detailTagNew" style="display:none">Novo</span>
         <img id="detailImg" src="" alt="">
       </div>
- 
-      <!-- Informações -->
       <div class="detail-info">
         <div class="detail-category" id="detailCategory"></div>
         <h1 class="detail-name" id="detailName"></h1>
         <p class="detail-desc" id="detailDesc"></p>
         <div class="detail-price" id="detailPrice"></div>
- 
         <div class="opt-label">Tamanho</div>
         <div class="size-options" id="sizeOptions"></div>
- 
         <div class="opt-label">Quantidade</div>
         <div class="qty-wrap">
           <button class="qty-btn" onclick="changeQty(-1)">−</button>
           <span class="qty-val" id="qtyVal">1</span>
           <button class="qty-btn" onclick="changeQty(1)">+</button>
         </div>
- 
         <div class="detail-cta">
           <button class="btn-primary" onclick="goToCheckout()">Comprar agora</button>
           <button class="btn-cart" onclick="addCurrentToCart()">+ Sacola</button>
         </div>
       </div>
- 
     </div>
   </div>
 </div><!-- /page-detail -->
- 
- 
+
+
 <!-- ══════════════════════════════════════
      PÁGINA: CHECKOUT
 ══════════════════════════════════════ -->
 <div class="page" id="page-checkout">
   <div class="checkout-wrap">
- 
     <div class="breadcrumb">
       <a href="#" onclick="showPage('catalog')">Coleção</a>
       <span>›</span>
@@ -162,13 +183,8 @@
       <span>›</span>
       <span>Finalizar Pedido</span>
     </div>
- 
     <div class="checkout-grid">
- 
-      <!-- ── Coluna principal ── -->
       <div>
- 
-        <!-- Revisão do pedido -->
         <div class="checkout-section">
           <div class="checkout-section-title">📦 Revisão do Pedido</div>
           <div class="review-product">
@@ -180,8 +196,6 @@
             <div class="review-price" id="checkoutPrice"></div>
           </div>
         </div>
- 
-        <!-- Forma de pagamento -->
         <div class="checkout-section">
           <div class="checkout-section-title">💳 Forma de Pagamento</div>
           <div class="payment-options">
@@ -207,8 +221,6 @@
             </button>
           </div>
         </div>
- 
-        <!-- Entrega ou retirada -->
         <div class="checkout-section">
           <div class="checkout-section-title">🚚 Entrega ou Retirada</div>
           <div class="delivery-options">
@@ -227,8 +239,6 @@
               </div>
             </button>
           </div>
- 
-          <!-- Campos de endereço (visíveis só quando entrega) -->
           <div id="deliveryFields" style="display:none; margin-top:24px">
             <div class="form-row">
               <div class="form-group">
@@ -246,8 +256,6 @@
             </div>
           </div>
         </div>
- 
-        <!-- Dados pessoais -->
         <div class="checkout-section">
           <div class="checkout-section-title">📱 Seus Dados</div>
           <div class="form-row">
@@ -261,32 +269,14 @@
             </div>
           </div>
         </div>
- 
-      </div><!-- /coluna principal -->
- 
-      <!-- ── Resumo lateral ── -->
+      </div>
       <div class="order-summary">
         <div class="summary-title">Resumo</div>
-        <div class="summary-row">
-          <span>Produto</span>
-          <span id="summaryProduct">—</span>
-        </div>
-        <div class="summary-row">
-          <span>Tamanho</span>
-          <span id="summarySize">—</span>
-        </div>
-        <div class="summary-row">
-          <span>Quantidade</span>
-          <span id="summaryQty">—</span>
-        </div>
-        <div class="summary-row">
-          <span>Pagamento</span>
-          <span id="summaryPay">PIX</span>
-        </div>
-        <div class="summary-row">
-          <span>Entrega</span>
-          <span id="summaryDelivery">Retirada</span>
-        </div>
+        <div class="summary-row"><span>Produto</span><span id="summaryProduct">—</span></div>
+        <div class="summary-row"><span>Tamanho</span><span id="summarySize">—</span></div>
+        <div class="summary-row"><span>Quantidade</span><span id="summaryQty">—</span></div>
+        <div class="summary-row"><span>Pagamento</span><span id="summaryPay">PIX</span></div>
+        <div class="summary-row"><span>Entrega</span><span id="summaryDelivery">Retirada</span></div>
         <hr class="summary-divider">
         <div class="summary-total-row">
           <span class="summary-total-label">Total</span>
@@ -295,12 +285,11 @@
         <button class="checkout-finish-btn" onclick="finishOrder()">Finalizar Pedido</button>
         <div class="security-note">🔒 Pedido enviado via WhatsApp</div>
       </div>
- 
     </div>
   </div>
 </div><!-- /page-checkout -->
- 
- 
+
+
 <!-- ══════════════════════════════════════
      PÁGINA: CONFIRMAÇÃO
 ══════════════════════════════════════ -->
@@ -319,8 +308,8 @@
     </div>
   </div>
 </div><!-- /page-confirm -->
- 
- 
+
+
 <!-- ── CART SIDEBAR ── -->
 <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
 <div class="cart-panel" id="cartPanel">
@@ -339,11 +328,16 @@
     <button class="checkout-btn-cart" onclick="cartToCheckout()">Finalizar Pedido</button>
   </div>
 </div>
- 
+
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
- 
-<script src="script.js"></script>
+
+<script src="data/products.js"></script>
+<script src="js/catalog.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/checkout.js"></script>
+<script src="js/ui.js"></script>
+<script type="text/babel" src="js/personalizer.jsx"></script>
+<script src="js/main.js"></script>
 </body>
 </html>
- 
