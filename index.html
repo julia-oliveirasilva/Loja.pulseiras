@@ -3,24 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pérola & Co — Pulseiras Artesanais</title>
+<title>Pérola &amp; Co — Pulseiras Artesanais</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-<!-- React + Babel para o personalizador -->
+<!-- React (necessário para a página de personalização) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
 </head>
 <body>
-
+ 
 <div id="cursor"></div>
-
+ 
 <header id="header">
-  <a class="logo" href="#" onclick="showPage('catalog')">Pérola <span>&amp; Co</span></a>
+  <a class="logo" onclick="showPage('catalog')">Pérola <span>&amp; Co</span></a>
   <nav>
-    <a href="#" onclick="showPage('catalog'); scrollToSection('#produtos')">Coleção</a>
-    <a href="#" onclick="showPage('catalog'); setTimeout(()=>scrollToSection('#depoimentos'),100)">Histórias</a>
-    <a href="#" onclick="showPage('catalog'); setTimeout(()=>scrollToSection('#contato'),100)">Contato</a>
+    <a onclick="showPage('catalog');setTimeout(()=>scrollToSection('#produtos'),100)">Coleção</a>
+    <a onclick="showPage('catalog');setTimeout(()=>scrollToSection('#depoimentos'),150)">Histórias</a>
+    <a onclick="showPage('catalog');setTimeout(()=>scrollToSection('#contato'),150)">Contato</a>
   </nav>
   <div class="header-actions">
     <button class="btn-personalizar" onclick="showPage('personalizar')">✨ Personalizar</button>
@@ -28,19 +28,12 @@
       Sacola
       <span class="cart-badge" id="cartBadge">0</span>
     </button>
-    <a href="https://wa.me/5581973420530?text=Olá%20vim%20acompanhar%20meu%20pedido"
-       target="_blank" rel="noopener noreferrer" class="acompanhar-pedido">
-      Acompanhar pedido
-    </a>
+    <a href="compras.html" class="acompanhar-pedido">Compras</a>
   </div>
 </header>
-
-<!-- ══════════════════════════════════════
-     PÁGINA: CATÁLOGO
-══════════════════════════════════════ -->
+ 
+<!-- CATÁLOGO -->
 <div class="page active" id="page-catalog">
-
-  <!-- HERO -->
   <section class="hero" id="inicio">
     <div class="hero-left">
       <div class="hero-tag">✦ Nova Coleção 2026</div>
@@ -53,39 +46,24 @@
     </div>
     <div class="hero-right">
       <div class="hero-pearl-visual">🫧</div>
-      <div class="hero-badge">
-        <span>100%</span>
-        <span>Artesanal</span>
-      </div>
+      <div class="hero-badge"><span>100%</span><span>Artesanal</span></div>
     </div>
   </section>
-
-  <!-- MARQUEE -->
-  <div class="marquee-wrap">
-    <div class="marquee" id="marqueeTrack"></div>
-  </div>
-
-  <!-- AUDIÊNCIA TABS (Infantil / Adulta) -->
+ 
+  <div class="marquee-wrap"><div class="marquee" id="marqueeTrack"></div></div>
+ 
   <section id="produtos">
     <div class="section-label">✦ Nossa Coleção</div>
     <h2 class="section-title reveal">Pulseiras <em style="font-style:italic;color:var(--mauve)">prontas</em></h2>
     <p class="section-sub reveal">Peças únicas para todos os momentos. Filtre por faixa etária ou tipo.</p>
-
-    <!-- TABS Infantil / Adulta -->
     <div class="audience-tabs reveal" id="audienceTabs">
-      <button class="audience-tab active" data-audience="adulta" onclick="setAudience('adulta', this)">
-        👩 Adulta
-      </button>
-      <button class="audience-tab" data-audience="infantil" onclick="setAudience('infantil', this)">
-        🧒 Infantil
-      </button>
+      <button class="audience-tab active" onclick="setAudience('adulta',this)">👩 Adulta</button>
+      <button class="audience-tab" onclick="setAudience('infantil',this)">🧒 Infantil</button>
     </div>
-
     <div class="filter-bar reveal" id="filterBar"></div>
     <div class="products-grid reveal" id="productsGrid"></div>
   </section>
-
-  <!-- BANNER PERSONALIZAR -->
+ 
   <section class="banner-custom reveal">
     <div class="banner-custom-inner">
       <div class="banner-custom-text">
@@ -94,223 +72,35 @@
         <p style="color:rgba(255,255,255,.6);font-size:.95rem;line-height:1.7;max-width:400px;margin-bottom:32px">
           Escolha as peças, o tamanho, as cores e a combinação perfeita para você ou para dar de presente.
         </p>
-        <button class="btn-primary" style="background:var(--rose);color:var(--deep)" onclick="showPage('personalizar')">
-          ✨ Começar a Criar
-        </button>
+        <button class="btn-primary" style="background:var(--rose);color:var(--deep)" onclick="showPage('personalizar')">✨ Começar a Criar</button>
       </div>
       <div class="banner-custom-visual">🎨</div>
     </div>
   </section>
-
-  <!-- DEPOIMENTOS -->
+ 
   <section id="depoimentos">
     <div class="section-label">✦ Quem usa, ama</div>
     <h2 class="section-title reveal">Histórias reais</h2>
     <p class="section-sub reveal">Clientes que se tornaram fãs.</p>
     <div class="reviews-grid" id="reviewsGrid"></div>
   </section>
-
-  <!-- CONTATO -->
+ 
   <section id="contato">
     <div class="section-label">✦ Fique por dentro</div>
     <h2 class="section-title">Novidades <em style="font-style:italic;color:var(--rose)">exclusivas</em></h2>
     <a href="https://wa.me/5581973420530?text=Olá%20vim%20pelo%20site" target="_blank" rel="noopener noreferrer" class="zap">WhatsApp</a>
     <a href="https://instagram.com/jujuh_oliveira06" target="_blank" class="insta">Instagram</a>
   </section>
-
-  <footer>
-    © 2026 Pérola <span>&amp;</span> Co — Feito com amor <span>♥</span> em Recife, PE
-  </footer>
-
-</div><!-- /page-catalog -->
-
-
-<!-- ══════════════════════════════════════
-     PÁGINA: PERSONALIZAR (React)
-══════════════════════════════════════ -->
+ 
+  <footer>© 2026 Pérola <span>&amp;</span> Co — Feito com amor <span>♥</span> em Recife, PE</footer>
+</div>
+ 
+<!-- PERSONALIZAR -->
 <div class="page" id="page-personalizar">
   <div id="personalizador-root"></div>
 </div>
-
-
-<!-- ══════════════════════════════════════
-     PÁGINA: DETALHE DO PRODUTO
-══════════════════════════════════════ -->
-<div class="page" id="page-detail">
-  <div class="detail-wrap">
-    <div class="breadcrumb">
-      <a href="#" onclick="showPage('catalog')">Coleção</a>
-      <span>›</span>
-      <span id="breadcrumbName">Produto</span>
-    </div>
-    <div class="detail-grid">
-      <div class="detail-img-wrap">
-        <span class="detail-tag-new" id="detailTagNew" style="display:none">Novo</span>
-        <img id="detailImg" src="" alt="">
-      </div>
-      <div class="detail-info">
-        <div class="detail-category" id="detailCategory"></div>
-        <h1 class="detail-name" id="detailName"></h1>
-        <p class="detail-desc" id="detailDesc"></p>
-        <div class="detail-price" id="detailPrice"></div>
-        <div class="opt-label">Tamanho</div>
-        <div class="size-options" id="sizeOptions"></div>
-        <div class="opt-label">Quantidade</div>
-        <div class="qty-wrap">
-          <button class="qty-btn" onclick="changeQty(-1)">−</button>
-          <span class="qty-val" id="qtyVal">1</span>
-          <button class="qty-btn" onclick="changeQty(1)">+</button>
-        </div>
-        <div class="detail-cta">
-          <button class="btn-primary" onclick="goToCheckout()">Comprar agora</button>
-          <button class="btn-cart" onclick="addCurrentToCart()">+ Sacola</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div><!-- /page-detail -->
-
-
-<!-- ══════════════════════════════════════
-     PÁGINA: CHECKOUT
-══════════════════════════════════════ -->
-<div class="page" id="page-checkout">
-  <div class="checkout-wrap">
-    <div class="breadcrumb">
-      <a href="#" onclick="showPage('catalog')">Coleção</a>
-      <span>›</span>
-      <a href="#" onclick="showPage('detail')">Produto</a>
-      <span>›</span>
-      <span>Finalizar Pedido</span>
-    </div>
-    <div class="checkout-grid">
-      <div>
-        <div class="checkout-section">
-          <div class="checkout-section-title">📦 Revisão do Pedido</div>
-          <div class="review-product">
-            <img class="review-img" id="checkoutImg" src="" alt="">
-            <div class="review-details">
-              <div class="review-name" id="checkoutName"></div>
-              <div class="review-meta" id="checkoutMeta"></div>
-            </div>
-            <div class="review-price" id="checkoutPrice"></div>
-          </div>
-        </div>
-        <div class="checkout-section">
-          <div class="checkout-section-title">💳 Forma de Pagamento</div>
-          <div class="payment-options">
-            <button class="pay-btn selected" data-pay="pix" onclick="selectPay('pix')">
-              <span class="pay-icon">🏦</span>
-              <span class="pay-label">PIX</span>
-              <span class="pay-sub">Aprovação imediata</span>
-            </button>
-            <button class="pay-btn" data-pay="cartao" onclick="selectPay('cartao')">
-              <span class="pay-icon">💳</span>
-              <span class="pay-label">Cartão de Crédito</span>
-              <span class="pay-sub">Até 3x sem juros</span>
-            </button>
-            <button class="pay-btn" data-pay="debito" onclick="selectPay('debito')">
-              <span class="pay-icon">🏧</span>
-              <span class="pay-label">Cartão de Débito</span>
-              <span class="pay-sub">Aprovação rápida</span>
-            </button>
-            <button class="pay-btn" data-pay="dinheiro" onclick="selectPay('dinheiro')">
-              <span class="pay-icon">💵</span>
-              <span class="pay-label">Dinheiro</span>
-              <span class="pay-sub">Na entrega / retirada</span>
-            </button>
-          </div>
-        </div>
-        <div class="checkout-section">
-          <div class="checkout-section-title">🚚 Entrega ou Retirada</div>
-          <div class="delivery-options">
-            <button class="delivery-opt" data-delivery="entrega" onclick="selectDelivery('entrega')">
-              <span class="delivery-icon">🛵</span>
-              <div class="delivery-info">
-                <div class="delivery-name">Entregar no meu endereço</div>
-                <div class="delivery-sub">Recife e região — combinamos o frete pelo WhatsApp</div>
-              </div>
-            </button>
-            <button class="delivery-opt selected" data-delivery="retirada" onclick="selectDelivery('retirada')">
-              <span class="delivery-icon">🏠</span>
-              <div class="delivery-info">
-                <div class="delivery-name">Retirar no local</div>
-                <div class="delivery-sub">Jaboatão dos Guararapes, PE — sem frete</div>
-              </div>
-            </button>
-          </div>
-          <div id="deliveryFields" style="display:none; margin-top:24px">
-            <div class="form-row">
-              <div class="form-group">
-                <label class="form-label">CEP</label>
-                <input class="form-input" type="text" placeholder="00000-000" maxlength="9">
-              </div>
-              <div class="form-group">
-                <label class="form-label">Bairro</label>
-                <input class="form-input" type="text" placeholder="Seu bairro">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Endereço</label>
-              <input class="form-input" type="text" placeholder="Rua, número, complemento">
-            </div>
-          </div>
-        </div>
-        <div class="checkout-section">
-          <div class="checkout-section-title">📱 Seus Dados</div>
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Nome</label>
-              <input class="form-input" type="text" placeholder="Seu nome completo">
-            </div>
-            <div class="form-group">
-              <label class="form-label">WhatsApp</label>
-              <input class="form-input" type="tel" placeholder="(81) 99999-0000">
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="order-summary">
-        <div class="summary-title">Resumo</div>
-        <div class="summary-row"><span>Produto</span><span id="summaryProduct">—</span></div>
-        <div class="summary-row"><span>Tamanho</span><span id="summarySize">—</span></div>
-        <div class="summary-row"><span>Quantidade</span><span id="summaryQty">—</span></div>
-        <div class="summary-row"><span>Pagamento</span><span id="summaryPay">PIX</span></div>
-        <div class="summary-row"><span>Entrega</span><span id="summaryDelivery">Retirada</span></div>
-        <hr class="summary-divider">
-        <div class="summary-total-row">
-          <span class="summary-total-label">Total</span>
-          <span class="summary-total-val" id="summaryTotal">R$ 0,00</span>
-        </div>
-        <button class="checkout-finish-btn" onclick="finishOrder()">Finalizar Pedido</button>
-        <div class="security-note">🔒 Pedido enviado via WhatsApp</div>
-      </div>
-    </div>
-  </div>
-</div><!-- /page-checkout -->
-
-
-<!-- ══════════════════════════════════════
-     PÁGINA: CONFIRMAÇÃO
-══════════════════════════════════════ -->
-<div class="page" id="page-confirm">
-  <div class="confirm-wrap">
-    <div class="confirm-card">
-      <div class="confirm-icon">🌸</div>
-      <div class="confirm-title">Pedido enviado!</div>
-      <p class="confirm-sub">Recebemos seu pedido e entraremos em contato pelo WhatsApp para confirmar os detalhes e combinar o pagamento.</p>
-      <div class="confirm-contact">
-        📱 <strong>(81) 97342-0530</strong><br>
-        📸 @jujuh_oliveira06<br>
-        <small style="color:var(--mauve)">Respondemos em até 1h nos dias úteis</small>
-      </div>
-      <button class="btn-primary" onclick="showPage('catalog')">Continuar comprando</button>
-    </div>
-  </div>
-</div><!-- /page-confirm -->
-
-
-<!-- ── CART SIDEBAR ── -->
+ 
+<!-- CARRINHO -->
 <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
 <div class="cart-panel" id="cartPanel">
   <div class="cart-header">
@@ -321,23 +111,14 @@
     <div class="cart-empty" id="cartEmpty">Sua sacola está vazia 🌸</div>
   </div>
   <div class="cart-footer">
-    <div class="cart-total">
-      <span>Total</span>
-      <span class="cart-total-val" id="cartTotal">R$ 0,00</span>
-    </div>
+    <div class="cart-total"><span>Total</span><span class="cart-total-val" id="cartTotal">R$ 0,00</span></div>
     <button class="checkout-btn-cart" onclick="cartToCheckout()">Finalizar Pedido</button>
   </div>
 </div>
-
-<!-- TOAST -->
+ 
 <div class="toast" id="toast"></div>
-
-<script src="data/products.js"></script>
-<script src="js/catalog.js"></script>
-<script src="js/cart.js"></script>
-<script src="js/checkout.js"></script>
-<script src="js/ui.js"></script>
-<script type="text/babel" src="js/personalizer.jsx"></script>
-<script src="js/main.js"></script>
+ 
+<script src="script.js"></script>
+<script type="text/babel" src="personalizar.js"></script>
 </body>
 </html>
